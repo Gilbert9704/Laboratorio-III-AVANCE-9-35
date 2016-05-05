@@ -166,22 +166,32 @@ public class LoginFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String pass = new String(contrsLogin.getPassword());
         String correo = correoLogin.getText();
-        
-        HashMap<String, Usuario> registros = new HashMap<>();
-        
+
         if ("".equals(correo) || "".equals(pass)){
             JOptionPane.showMessageDialog(null, "Debe ingresar los campos solicitados");
         }else {
+            HashMap<String, Usuario> registros = new HashMap<>();
             try {//si pone problemas colocar (ainf = new ArchivoInf();)
                 registros = ainf.leerDatosUsr();
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            Usuario logIn = registros.get(correo); //solucionar problema con el registro y login
+            Usuario logIn = registros.get(correo);
             if (logIn != null){
                 JOptionPane.showMessageDialog(null, "¡Ha Iniciado Sesión!");
+                
+                String nm = logIn.getNombre();
+                String nk = logIn.getNick();
+                int ed = logIn.getEdad();
+                String cr = logIn.getCorreo();
+                PerfilFrame pfrm = new PerfilFrame(nm, nk, ed, cr);
+                pfrm.setTitle("Pefil de " + nm);
+                pfrm.setLocationRelativeTo(null);
+                pfrm.setVisible(true);
+                
                 //Aqui iria la funcion cuando se acceda al perfil
+                //continuar en el nuevo formulario para cuando se acceda
             }else{
                 JOptionPane.showMessageDialog(null, "¡El Usuario no existe!");
             }
