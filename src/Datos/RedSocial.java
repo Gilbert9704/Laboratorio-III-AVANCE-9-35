@@ -82,22 +82,5 @@ public class RedSocial {
     public String toString() {
         return "Datos del Usuario:" + "\n Nombre: " + regUsr.getNombre() + "\n Nick: " + regUsr.getNick() + "\n Edad: " + regUsr.getEdad() 
                 + "\n Constraseña: " + regUsr.getClave() + "\n Correo: " + regUsr.getCorreo() + "\n Por favor no olvide su contraseña";
-    }
-    
-    public void accederPagina(String pass){
-        
-        email = LoginFrame.correoLogin.getText();
-        
-        if ("".equals(email) || "".equals(pass)){
-            JOptionPane.showMessageDialog(null, "Debe ingresar los campos solicitados");
-        }else {
-            Usuario logIn = usuarios.get(email); 
-            if (logIn != null){
-                JOptionPane.showMessageDialog(null, "¡Ha Iniciado Sesión!");
-            }else{
-                JOptionPane.showMessageDialog(null, "¡El Usuario no existe!");
-            }
-        }    
-    }
-    
+    }   
 }

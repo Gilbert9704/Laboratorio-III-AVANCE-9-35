@@ -11,6 +11,7 @@ import Datos.Usuario;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -149,11 +150,11 @@ public class LoginFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //Boton Salir
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    //Boton Registrarse
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         RedSocialFrame interfaz = new RedSocialFrame();  
         interfaz.setTitle("Registro de Usuario");
@@ -161,10 +162,30 @@ public class LoginFrame extends javax.swing.JFrame {
         interfaz.setVisible(true);
         
     }//GEN-LAST:event_jButton3ActionPerformed
-
+    //Boton Acceder
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String pass = new String(contrsLogin.getPassword());
-        rs.accederPagina(pass);
+        String correo = correoLogin.getText();
+        
+        HashMap<String, Usuario> registros = new HashMap<>();
+        
+        if ("".equals(correo) || "".equals(pass)){
+            JOptionPane.showMessageDialog(null, "Debe ingresar los campos solicitados");
+        }else {
+            try {//si pone problemas colocar (ainf = new ArchivoInf();)
+                registros = ainf.leerDatosUsr();
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            Usuario logIn = registros.get(correo); //solucionar problema con el registro y login
+            if (logIn != null){
+                JOptionPane.showMessageDialog(null, "¡Ha Iniciado Sesión!");
+                //Aqui iria la funcion cuando se acceda al perfil
+            }else{
+                JOptionPane.showMessageDialog(null, "¡El Usuario no existe!");
+            }
+        }  
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
